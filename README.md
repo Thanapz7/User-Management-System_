@@ -5,9 +5,9 @@
 ## 🔧 เทคโนโลยีที่ใช้
 
 - **Frontend**: Next.js, TailwindCSS
-- **Backend**: Express.js, Prisma, SQLite
+- **Backend**: Express.js, Prisma, SQL
 - **Authentication**: Session (Cookie-based)
-- **Database**: Prisma ORM + SQLite (สำหรับพัฒนา)
+- **Database**: Prisma ORM + SQL (สำหรับพัฒนา)
 
 ## ⚙️ วิธีติดตั้งและรันโปรเจกต์
 
