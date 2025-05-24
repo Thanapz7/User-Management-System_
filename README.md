@@ -24,6 +24,12 @@ npm install
 cd backend
 npx prisma generate
 npx prisma migrate dev --name init
+(❗️ ถ้า npx prisma migrate dev --name init ไม่สำเร็จ ให้ทำตามนี้:
+  1.สร้างไฟล์ .env ในโฟลเดอร์ backend
+  2.ใส่ข้อมูลเชื่อมต่อฐานข้อมูล เช่น:
+   DATABASE_URL="mysql://your_user:your_password@localhost:3306/your_db"
+  3.แล้วรันอีกครั้ง: npx prisma migrate dev --name init
+)
 
 3. รันโปรเจกต์ (Dev Mode)
 รัน backend
