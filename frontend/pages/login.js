@@ -29,19 +29,22 @@ export default function LoginPage(){
         }
     }
     return(
-        <div className="min-h-screen flex items-center justify-center bg-grey-100 px-4">
+        <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
             <form onSubmit={handleLogin} className="bg-white p-6 rounded-xl shadow-lg w-full max-w-sm space-y-4">
-                <h1 className="text-xl font-bold text-center">Login</h1>
+                <h1 className="text-xl font-bold text-center">ล็อกอิน</h1>
                 { error && (<div className="bg-red-100 text-red-700 p-2 rounded text-sm text-center">{error}</div>)}
                 <div>
                     <label className="block text-sm font-medium">Email</label>
                     <input type="email" className="w-full border border-grey-300 rounded px-3 py-2 mt-1" value={email} onChange={(e)=>setEmail(e.target.value)} required /> 
                 </div>
                 <div>
-                    <label className="block text-sm font-medium">Email</label>
+                    <label className="block text-sm font-medium">Password</label>
                     <input type="password" className="w-full border border-grey-300 rounded px-3 py-2 mt-1" value={password} onChange={(e)=>setPassword(e.target.value)} required /> 
                 </div>
-                <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded transition">Login</button>
+                <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded transition">ล็อกอิน</button>
+                <p className="mt-4 text-center text-sm text-gray-600">ยังไม่มีบัญชี? 
+                    <button onClick={()=>router.push("/register")} className="text-blue-600 hover:underline"> สมัครสมาชิก</button>
+                </p>
             </form>
         </div>
     )

@@ -36,7 +36,7 @@ export default function RegisterPage(){
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
             <form onSubmit={handleRegister} className="bg-white p-6 rounded-xl shadow-lg w-full max-w-sm space-y-4">
-                <h1 className="text-xl font-bold text-center">Register</h1>
+                <h1 className="text-xl font-bold text-center">สมัครสมาชิก</h1>
                 {error && (<div className="bg-red-100 text-red-700 p-2 rounded text-sm text-center">{error}</div>)}
                 <div>
                     <label className="block text-sm font-medium">Name</label>
@@ -57,7 +57,7 @@ export default function RegisterPage(){
                         <option value="admin">Admin</option>
                     </select>
                 </div>
-                <button type="submit" className="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded transition">Register</button>
+                <button type="submit" className="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded transition">สมัครสมาชิก</button>
             </form>
         </div>
     )

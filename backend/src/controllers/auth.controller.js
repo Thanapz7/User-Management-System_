@@ -30,7 +30,7 @@ exports.login = async (req, res) => {
     try{
         const user = await prisma.user.findUnique({where: {email}});
         if(!user || !(await bcrypt.compare(password, user.password))){
-            return res.status(401).json({error: 'Invalid credentials'});
+            return res.status(401).json({error: 'Invalid Email or Password'});
         }
         req.session.user = { id: user.id, role: user.role};
         res.json({message: 'Login Seccessful'})
