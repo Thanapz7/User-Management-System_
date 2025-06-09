@@ -24,6 +24,7 @@ npm install
 cd backend
 npx prisma generate
 npx prisma migrate dev --name init
+npx prisma db seed
 (❗️ ถ้า npx prisma migrate dev --name init ไม่สำเร็จ ให้ทำตามนี้:
   1.สร้างไฟล์ .env ในโฟลเดอร์ backend
   2.ใส่ข้อมูลเชื่อมต่อฐานข้อมูล เช่น:
