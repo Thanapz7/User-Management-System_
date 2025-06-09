@@ -85,7 +85,7 @@ exports.updateUser = async (req, res) => {
   const data = {
     name,
     email,
-    ...(roleId && { roleId }),
+    ...(roleId && { role: { connect: { id: roleId } } }),
   };
 
   if (password && password.trim() !== '') {
@@ -111,7 +111,6 @@ exports.updateUser = async (req, res) => {
     }
   });
 };
-
 
 exports.deleteUser = async (req, res) => {
   const { id } = req.params;

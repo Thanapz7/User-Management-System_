@@ -16,25 +16,32 @@ export default function RegisterPage() {
   };
 
   const handleRegister = async (e) => {
-    e.preventDefault();
-    setError('');
-    try {
-      const res = await fetch('http://localhost:4000/api/auth/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form)
-      });
+  e.preventDefault();
+  setError('');
 
-      if (res.ok) {
-        router.push('/login');
-      } else {
-        const data = await res.json();
-        setError(data.error || 'Registration failed');
-      }
-    } catch (err) {
-      setError('Register failed');
-    }
+  const bodyToSend = {
+    ...form,
+    role: form.roleName
   };
+  delete bodyToSend.roleName;
+
+  try {
+    const res = await fetch('http://localhost:4000/api/auth/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(bodyToSend)
+    });
+
+    if (res.ok) {
+      router.push('/login');
+    } else {
+      const data = await res.json();
+      setError(data.error || 'Registration failed');
+    }
+  } catch (err) {
+    setError('Register failed');
+  }
+};
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">

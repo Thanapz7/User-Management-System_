@@ -3,26 +3,46 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 exports.register = async (req, res) => {
-  const { name, email, password, roleName } = req.body;
+  const { name, email, password, role } = req.body;
 
-  const existingUser = await prisma.user.findUnique({ where: { email } });
-  if (existingUser) return res.status(400).json({ error: 'Email already exists' });
+  if (!role) {
+    return res.status(400).json({ error: 'Role is required' });
+  }
 
-  const role = await prisma.role.findUnique({ where: { name: roleName } });
-  if (!role) return res.status(400).json({ error: 'Invalid role' });
+  try {
+    const existingUser = await prisma.user.findUnique({
+      where: { email }
+    });
+    if (existingUser) {
+      return res.status(400).json({ error: 'Email already exists' });
+    }
 
-  const hashed = await bcrypt.hash(password, 10);
+    const roleRecord = await prisma.role.findUnique({
+      where: { name: role }
+    });
 
-  const newUser = await prisma.user.create({
-    data: {
-      name,
-      email,
-      password: hashed,
-      roleId: role.id,
-    },
-  });
+    if (!roleRecord) {
+      return res.status(400).json({ error: 'Invalid role' });
+    }
 
-  res.json({ message: 'Registered', user: { id: newUser.id, name: newUser.name } });
+    const hashed = await bcrypt.hash(password, 10);
+
+    const newUser = await prisma.user.create({
+      data: {
+        name,
+        email,
+        password: hashed,
+        role: {
+          connect: { id: roleRecord.id }
+        }
+      }
+    });
+
+    res.json({ message: 'User registered', user: newUser });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to register user' });
+  }
 };
 
 exports.login = async (req, res) => {
